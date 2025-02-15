@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Geist, Geist_Mono,Source_Sans_3 } from "next/font/google";
+import {Geist_Mono,Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
@@ -10,11 +10,6 @@ const geistSans = Source_Sans_3({
   subsets: ["latin"],
   weight: ["400","500","600","700"],
   display: "block",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
