@@ -40,7 +40,7 @@ const ProblemSubmission = ({boilerplate,questionName}:ProblemSubmissionProps) =>
   
 
 
-const handleClicked = async (e:any) => {
+const handleClicked = async (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setIsLoading(true)
     const res = await submitCode({code: code||'',
@@ -55,7 +55,7 @@ const handleClicked = async (e:any) => {
 }
 
 
-const handleAdmin = async (e:any) => {
+const handleAdmin = async (e:React.MouseEvent<HTMLButtonElement>) => {
   e.preventDefault()
   //admin mutation
   const res = await adminMutation({code: code||'',
@@ -204,7 +204,7 @@ const TestCases = ({result,isLoading}:TestCasesProps) => {
           //Only render the selected case
           if(index!== caseNo)
             return null
-          let style = "bg-[#233848]/40 p-3 rounded-md"
+          const style = "bg-[#233848]/40 p-3 rounded-md"
           return  <div key={index} className={`${e.passed?"text-green-500":"text-red-500"} w-full flex flex-col gap-3 p-2 rounded-md font-semibold`}>
               <h1 className={`${style}`}>Input: {e.input}</h1>
               <p className={`${style}`}>Expected: {JSON.stringify(e.expected)} </p>

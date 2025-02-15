@@ -46,7 +46,7 @@ function SignOut() {
       if(session?.status == "unauthenticated")
         router.push("/")
       
-    }, [session])
+    }, [session,router])
     return (
       <Button
         className="flex-1"
