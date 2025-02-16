@@ -25,7 +25,12 @@ export default defineSchema({
     ),
     
   }),
-
+  questionDescription: defineTable({
+    name: v.string(),
+    description: v.string(),
+    difficulty:v.string(),
+ 
+  }),
   question: defineTable({
     name: v.string(),
     language : v.string(),

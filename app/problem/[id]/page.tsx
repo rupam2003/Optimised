@@ -58,18 +58,15 @@ const Page =  async ({params}:any) => {
 
   const resolvedParams:Params = await params;
   const problem = await fetchQuery(api.problems.getQuestion, {name: resolvedParams.id});
+  const mappedBoilerplates = new Map(problem?.boilerplates?.map((o) => [o.language, o.boilerplate]));
   
   
-  const boilerplates = {
-    cpp:problem?.cpp_boilerplate,
-    java:problem?.java_boilerplate
-  }
   return (
     <>
     
     {problem && <div className='mx-3 gap-3 lg:h-[92vh] py-3 flex flex-col lg:flex-row justify-center'>
       <ProblemDescription description={problem.description} />
-      <ProblemSubmission questionName={problem.name} boilerplate={boilerplates}/>
+      <ProblemSubmission questionName={problem.name||""} boilerplates={mappedBoilerplates}/>
       
     </div>}
     </>

@@ -11,10 +11,7 @@ import { handleEditorDidMount,handleEditorWillMount } from '@/lib/utils';
 
 
 interface ProblemSubmissionProps {
-  boilerplate: {
-    cpp:string | undefined,
-    java:string | undefined
-  }
+  boilerplates: Map<string, string | undefined>
   questionName: string
 }
 
@@ -29,9 +26,10 @@ type SubmissionResult = {
 
 // #include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <string>\nusing namespace std;\n\n// User code here\n\nint main() {\n    // Hardcoded test cases\n    vector<pair<vector<int>, int>> inputs = {\n        {{2, 7, 11, 15}, 9},\n        {{3, 2, 4}, 6},\n        {{3, 3}, 6}\n    };\n    vector<vector<int>> expectedOutputs = {\n        {0, 1},\n        {1, 2},\n        {0, 1}\n    };\n\n    // Print JSON array opening bracket\n    cout << "[";\n\n    for (size_t i = 0; i < inputs.size(); ++i) {\n        vector<int> nums = inputs[i].first;\n        int target = inputs[i].second;\n        vector<int> expected = expectedOutputs[i];\n\n        vector<int> result = twoSum(nums, target);\n\n        // Check if the result matches the expected output\n        bool passed = (result == expected);\n\n        // Output JSON object for the test case\n        cout << "{";\n        cout << "\\"testCase\\": " << (i + 1) << ", ";\n        cout << "\\"passed\\": " << (passed ? "true" : "false") << ", ";\n        cout << "\\"expected\\": [" << expected[0] << ", " << expected[1] << "], ";\n        cout << "\\"got\\": [" << result[0] << ", " << result[1] << "]";\n        cout << "}";\n\n        // Add a comma if not the last test case\n        if (i < inputs.size() - 1) {\n            cout << ",";\n        }\n    }\n\n    // Print JSON array closing bracket\n    cout << "]";\n\n    return 0;\n}\n
 
-const ProblemSubmission = ({boilerplate,questionName}:ProblemSubmissionProps) => {
-
-  const [code, setCode] = useState<string|undefined>(boilerplate.cpp)
+const ProblemSubmission = ({boilerplates,questionName}:ProblemSubmissionProps) => {
+  console.log(boilerplates);
+  
+  const [code, setCode] = useState<string|undefined>(boilerplates.get("cpp"))
   const [result, setResult] = useState<SubmissionResult|undefined>()
   const [isLoading, setIsLoading] =useState<boolean>(false)
   const [language, setLanguage] = useState<string>('cpp')
@@ -73,10 +71,7 @@ const handleLangChange = async (value:string) => {
   setLanguage(value)
   setCode(undefined)
   await wait(100)
-  if(value == "cpp") 
-    setCode(boilerplate.cpp)
-  if(value == "java") 
-    setCode(boilerplate.java || "hello")
+  setCode(boilerplates.get(value))
 }
 
 

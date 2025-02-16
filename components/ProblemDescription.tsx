@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
 interface ProblemDescriptionProps {
-    description: string
+    description: string | undefined
 }
 
 const ProblemDescription = ({description}:ProblemDescriptionProps) => {
