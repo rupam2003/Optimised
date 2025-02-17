@@ -16,7 +16,14 @@ const Header = () => {
     return (
     <header className='font-bold border-b-[1px] backdrop-blur-2xl bg-opacity-20 z-50 sticky top-0   w-full  bg-black  '>
       <div className='mx-auto flex justify-between items-center max-w-[650px]'>
-        <h1 className='font-semibold text-xl ml-4 m-2.5'>fianchetto</h1>
+        
+        <div className='flex justify-center items-center gap-2 ml-4 m-1.5'>
+          <figure className='w-9 h-9  relative '>
+            <Image className='rounded-full' src={"\code.png"} fill alt={"profile"}/>
+          </figure>
+          <h1 className='font-semibold text-xl '>Optimised</h1>
+        </div>
+        
         {
           <div className='flex gap-3 mr-3'>
             {
