@@ -17,18 +17,18 @@ const Header = () => {
     <header className='font-bold border-b-[1px] backdrop-blur-2xl bg-opacity-20 z-50 sticky top-0   w-full  bg-black  '>
       <div className='mx-auto flex justify-between items-center max-w-[650px]'>
         
-        <div className='flex justify-center items-center gap-2 ml-4 m-1.5'>
-          <figure className='w-9 h-9  relative '>
+        <div className='flex justify-center items-center gap-1 ml-1 m-1.5'>
+          <figure className='w-8 h-8 sm:w-9 sm:h-9  relative '>
             <Image className='rounded-full' src={"\code.png"} fill alt={"profile"}/>
           </figure>
-          <h1 className='font-semibold text-xl '>Optimised</h1>
+          <h1 className='font-semibold text-lg sm:text-xl '>Optimised</h1>
         </div>
         
         {
-          <div className='flex gap-3 mr-3'>
+          <div className='flex items-center gap-2 mr-1 '>
             {
                 session?.user?.image && 
-                <div className='w-9 h-9  relative '>
+                <div className='w-8 h-8 sm:w-9 sm:h-9  relative '>
                     <Image className='rounded-full' src={session?.user?.image} fill objectFit='contain' alt={"profile"}/>
                 </div>
             }
