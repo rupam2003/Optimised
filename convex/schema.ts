@@ -1,6 +1,7 @@
 import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { question } from "./submit";
 
 // The schema is normally optional, but Convex Auth
 // requires indexes defined on `authTables`.
@@ -36,9 +37,16 @@ export default defineSchema({
     language : v.string(),
     template : v.optional(v.string()),
     boilerplate : v.optional(v.string()),
-    
 
-    
-    
   }),
+
+  submission: defineTable({
+    question: v.string(),
+    userId:v.id("users"),
+    language : v.string(),
+    code : v.string(),
+    passed:v.boolean()
+
+  }),
+
 });

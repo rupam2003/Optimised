@@ -1,4 +1,4 @@
-import { action, internalQuery, mutation } from "./_generated/server";
+import { action, internalMutation, internalQuery, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { getAuthUserId } from "@convex-dev/auth/server";
@@ -30,11 +30,7 @@ export const submitCode = action({
         }
         let template:string = question.template!
         const newCode:string =  template.replace("// User code here", code)
-        // if(args.language == "cpp")
-        //     template = questions.cpp_template!
-        // else if(args.language == "java")
-        //     template = questions.java_template!
-        // const newCode:string =  template.replace("// User code here", code)
+        
         const {name,version} = getPistonConstants(args.language)
         
 
@@ -55,6 +51,7 @@ export const submitCode = action({
                 })
             })    
             const data = await res.json()
+            
             console.log(newCode)
             console.log(data) 
             if(data?.run?.stderr !== "") {
@@ -68,6 +65,20 @@ export const submitCode = action({
                 console.log(data.run.output);
                 
                 const output = JSON.parse(data.run.output)
+                //check passed or not
+                const failedTestCases =  output.filter((e:any)=>{
+                    return !e.passed
+                })
+            
+               console.log(output,failedTestCases);
+               
+
+                const submission = await ctx.runMutation(internal.submit.createSubmission,{
+                    code:args.code,
+                    language:args.language,
+                    question:args.name,
+                    passed:failedTestCases.length == 0
+                })
                 return {
                     output: output,
                     error:null
@@ -109,6 +120,40 @@ export const getQuestion = internalQuery({
     },
 })
 
+//add submission
+
+export const createSubmission = internalMutation({
+    args:{
+        code: v.string(),
+        question: v.string(),
+        language:v.string(),
+        passed:v.boolean()
+    },
+    handler: async (ctx,args) => {
+        
+        const userId = await getAuthUserId(ctx)
+        const question = await ctx.runQuery(internal.submit.getQuestion, 
+            {
+                name: args.question,
+                language:args.language
+            })
+        console.log(question);
+        
+        if (!question || !userId) {
+            return null
+        }
+
+        const res =  await ctx.db.insert("submission", 
+            {
+                userId:userId,
+                question:args.question,
+                language: args.language,
+                code:args.code,
+                passed:args.passed
+        });    
+        return res;
+    },  
+})
 
 export const admin = mutation({
     args:{
