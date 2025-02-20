@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Editor from '@monaco-editor/react';
 import { Braces, CirclePlay, ListChecks, Loader, SquareTerminal } from 'lucide-react';
-import { useAction, useMutation } from 'convex/react';
+import { useAction, useMutation, useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -34,6 +34,7 @@ const ProblemSubmission = ({boilerplates,questionName}:ProblemSubmissionProps) =
   const [isLoading, setIsLoading] =useState<boolean>(false)
   const [language, setLanguage] = useState<string>('cpp')
   const submitCode = useAction(api.submit.submitCode)
+  const isAdmin = useQuery(api.users.isAdmin)
   const adminMutation = useMutation(api.submit.admin)
   
 
@@ -127,12 +128,12 @@ const handleLangChange = async (value:string) => {
       }
       </div>
 
-        <Button 
+        {isAdmin && <Button 
         onClick={handleAdmin} 
         variant={"secondary"}
         className=' flex gap-1 text-green-700 px-2 absolute bottom-3 right-40 font-bold rounded-md'>
           <CirclePlay color='green'/>Admin
-        </Button>
+        </Button>}
         <Button 
         onClick={handleClicked} 
         variant={"secondary"}

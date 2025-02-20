@@ -26,6 +26,22 @@ export const viewer = query({
   },
 });
 
+export const isAdmin = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    
+    if (userId === null) {
+      return false
+    }
+    const user = await ctx.db.get(userId);
+    if(user?.email == "rupambhattacharya0@gmail.com")
+      return true
+    return false
+}
+    
+});
+
 export const getUserData = query({
   args: {
     userId:v.id("users")
