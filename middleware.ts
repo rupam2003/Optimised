@@ -8,9 +8,9 @@ const isSignInPage = createRouteMatcher(["/"]);
 const isProtectedRoute = createRouteMatcher(["/problem(.*)"]);
 
 export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
-  if (isSignInPage(request) && (await convexAuth.isAuthenticated())) {
-    return nextjsMiddlewareRedirect(request, "/product");
-  }
+  // if (isSignInPage(request) && (await convexAuth.isAuthenticated())) {
+  //   return nextjsMiddlewareRedirect(request, "/product");
+  // }
   if (isProtectedRoute(request) && !(await convexAuth.isAuthenticated())) {
     return nextjsMiddlewareRedirect(request, "/");
   }
