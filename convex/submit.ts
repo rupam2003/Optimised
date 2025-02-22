@@ -1,4 +1,4 @@
-import { action, internalMutation, internalQuery, mutation } from "./_generated/server";
+import { action, internalMutation, internalQuery, mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 import { internal } from "./_generated/api";
 import { getAuthUserId } from "@convex-dev/auth/server";
@@ -95,15 +95,7 @@ export const submitCode = action({
     }
 })
 
-export const question = internalQuery({
-    args: {
-        name: v.string(),
-    },
-    handler: async (ctx,args) => {
-        const question = await ctx.db.query("questions").filter(q => q.eq(q.field("name"),args.name)).first();
-        return question;
-    },
-})
+
 //for new table
 export const getQuestion = internalQuery({
     args: {
@@ -152,6 +144,24 @@ export const createSubmission = internalMutation({
                 passed:args.passed
         });    
         return res;
+    },  
+})
+//get submissions
+export const getSubmissions = query({
+    args:{
+        question: v.string(),
+    },
+    handler: async (ctx,args) => {
+        
+        const userId = await getAuthUserId(ctx)
+        if(!userId)
+            return []
+        const submissions =  await ctx.db.query("submission")
+        .filter(q => q.eq(q.field("question"),args.question))
+        .filter(q => q.eq(q.field("userId"),userId))
+        .collect();
+              
+        return submissions;
     },  
 })
 
