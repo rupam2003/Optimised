@@ -61,7 +61,7 @@ const Page =  async ({params}:any) => {
                 
               </AccordionTrigger>
               <AccordionContent>
-                <Code>{e.code}</Code>
+                <Code code={e.code} lang={e.language}/>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
