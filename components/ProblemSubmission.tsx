@@ -113,7 +113,9 @@ const handleLangChange = async (value:string) => {
             onMount={handleEditorDidMount}
 
             options={{
-              fontSize:14,
+              fontFamily:"Inconsolata",
+              fontSize:16,
+              fontWeight:"thin",
               wordWrap: 'on',
               cursorStyle: 'line',
               cursorWidth: 2,
