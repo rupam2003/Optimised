@@ -32,6 +32,10 @@ const Page =  async ({params}:any) => {
     { token: await convexAuthNextjsToken() }
   )
   
+  const LANGUAGE_NAMES = new Map([
+    ["cpp", "C++"],
+    ["java", "Java"],
+  ]);
   
   
   return (
@@ -50,13 +54,22 @@ const Page =  async ({params}:any) => {
       <div className='px-3 lg:max-h-[80vh] mb-10 overflow-y-scroll'>
 
         {
-          submissions.map((e) =>{
+          submissions.reverse().map((e) =>{
+            const date = new Date(e._creationTime)
             return <Accordion key={e._id} type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger>
+              <AccordionTrigger className='flex'>
                 {e.passed
-                ?<h1 className='text-lg font-bold text-green-600'>Right Answer</h1> 
-                :<h1 className='text-lg font-bold text-red-600'>Wrong Answer</h1> 
+                ?<>
+                  <h1 className='text-lg font-bold text-green-600'>Right Answer</h1> 
+                  <h1 className='text-lg font-bold text-green-600'>{LANGUAGE_NAMES.get(e.language)}</h1> 
+                  <h1 className='text-lg font-bold text-green-600'>{date.getDate()}.{date.getMonth()+1}.{date.getFullYear()}</h1> 
+                </>
+                :<>
+                  <h1 className='text-lg font-bold text-red-600'>Right Answer</h1> 
+                  <h1 className='text-lg font-bold text-red-600'>{LANGUAGE_NAMES.get(e.language)}</h1> 
+                  <h1 className='text-lg font-bold text-red-600'>{date.getDate()}.{date.getMonth()+1}.{date.getFullYear()}</h1> 
+                </> 
                 }
                 
               </AccordionTrigger>
