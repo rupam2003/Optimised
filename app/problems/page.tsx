@@ -24,7 +24,7 @@ const Page = async () => {
                 asChild>
                     
                     <Link href={`/problem/${problem.name}`} >
-                        <h1 className=' hover:text-blue-500 capitalize font-bold'>{index+1}.{name}</h1>
+                        <h1 className=' hover:text-blue-500 capitalize font-bold'>{index+1}. {name}</h1>
                         <h2 className='text-green-600'>{problem.difficulty}</h2>
                     </Link>
                 </Button>

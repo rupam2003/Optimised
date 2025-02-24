@@ -66,7 +66,7 @@ const Page =  async ({params}:any) => {
                   <h1 className='text-lg font-bold text-green-600'>{date.getDate()}.{date.getMonth()+1}.{date.getFullYear()}</h1> 
                 </>
                 :<>
-                  <h1 className='text-lg font-bold text-red-600'>Right Answer</h1> 
+                  <h1 className='text-lg font-bold text-red-600'>Wrong Answer</h1> 
                   <h1 className='text-lg font-bold text-red-600'>{LANGUAGE_NAMES.get(e.language)}</h1> 
                   <h1 className='text-lg font-bold text-red-600'>{date.getDate()}.{date.getMonth()+1}.{date.getFullYear()}</h1> 
                 </> 
