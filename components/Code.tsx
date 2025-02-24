@@ -1,7 +1,8 @@
 "use client"
 import { ReactNode, useEffect } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism-twilight.css";
+import "@/app/prism-vsc-dark-plus.css"
+
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
 import "prismjs/components/prism-java";
@@ -18,7 +19,7 @@ export const Code = ({code, lang}:Props) => {
   return (
     <pre>
 
-    <code className={`lang-${lang} bg-transparent relative rounded  px-[0.3rem] py-[0.2rem] font-mono text-sm"`}>
+    <code className={`lang-${lang} bg-transparent relative rounded  px-[0.3rem] py-[0.2rem] font-sans text-sm"`}>
       {code}
     </code>
     </pre>
