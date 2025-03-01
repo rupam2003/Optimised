@@ -4,8 +4,13 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
 import { motion } from "motion/react"
+import { useQuery } from 'convex/react'
+import { api } from '@/convex/_generated/api'
+import { useAuthActions } from '@convex-dev/auth/react'
 const HomePage = () => {
 
+  const session = useQuery(api.users.viewer)
+  const { signIn } = useAuthActions();
    // Parent and child animation variants
    const parentVariants = {
     hidden: { opacity:  0},
@@ -19,8 +24,8 @@ const HomePage = () => {
   };
 
   const childVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: {  filter: "blur(5px)",opacity: 0, y: 20 },
+    visible: {  filter: "blur(0px)",opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -75,9 +80,18 @@ const HomePage = () => {
       </motion.h2>
 
       <motion.div className='my-6' variants={childVariants}>
-        <Button asChild>
+        
+        
+       {session?.status == "unauthenticated"
+        ?<Button 
+          onClick={() => void signIn("google", { redirectTo: "/" })}>
+          GET STARTED
+        </Button>
+          
+        :<Button asChild>
           <Link className='font-[800]' href={"/problems"}>GET STARTED</Link>
         </Button>
+}
       </motion.div>
 
       
