@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import {Geist_Mono,Source_Sans_3,Inconsolata } from "next/font/google";
+import { Geist_Mono, Source_Sans_3, Inconsolata } from "next/font/google";
 import "./globals.css";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
@@ -8,14 +8,14 @@ import Header from "@/components/Header";
 const geistSans = Source_Sans_3({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  weight: ["400","500","600","700"],
+  weight: ["400", "500", "600", "700"],
   display: "block",
 });
 
 const inconsolata = Inconsolata({
   variable: "--font-inconsolata",
   subsets: ["latin"],
-  weight: ["400","500","600","700"],
+  weight: ["400", "500", "600", "700"],
   display: "block",
 });
 
@@ -39,14 +39,20 @@ export default function RootLayout({
       // class attribute on it */}
       <html lang="en" suppressHydrationWarning>
         <ConvexClientProvider>
-        <body
-          className={`dark ${geistSans.className} antialiased`}
-        >
-          <Header />
-          <ThemeProvider attribute="class">{children}</ThemeProvider>
-        </body>
+          <body
+            className={`dark min-h-screen relative ${geistSans.className} antialiased`}
+          >
+
+            <div
+              style={{
+                backgroundImage: `url('/grain.jpg')`,
+              }}
+              className="absolute inset-0 -z-30 opacity-5" />
+            <Header />
+            <ThemeProvider attribute="class">{children}</ThemeProvider>
+          </body>
         </ConvexClientProvider>
-        
+
       </html>
     </ConvexAuthNextjsServerProvider>
   );

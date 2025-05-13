@@ -32,8 +32,9 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
-    --background: 0, 0%, 0%;
+    --background: 220, 60%, 3%;
     --foreground: 60 9.1% 97.8%;
     --card: 20 14.3% 4.1%;
     --card-foreground: 60 9.1% 97.8%;
@@ -50,7 +51,7 @@
     --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 60 9.1% 97.8%;
-    --border:0, 0%, 12%;
+    --border: 0, 0%, 12%;
     --input: 12 6.5% 15.1%;
     --ring: 24 5.7% 82.9%;
     --chart-1: 220 70% 50%;
@@ -61,16 +62,16 @@
   }
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 5px;
   height: 5px;
   background-color: transparent;
-  
+
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background-color: #233848;
-  
+
   border-radius: 50px;
 }
 
@@ -86,39 +87,46 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
-  .description 
-  {
-    
-    h1{
+
+  .description {
+
+    h1 {
       @apply my-3 text-2xl font-semibold;
     }
-    h2{
+
+    h2 {
       @apply my-1 text-lg font-semibold;
     }
-    h3{
+
+    h3 {
       @apply my-1 text-lg font-medium;
     }
-    pre{
-      @apply bg-[#233848]/40 shadow border-[1px] p-3  text-wrap rounded-md;
+
+    pre {
+      @apply bg-[#233848]/40 shadow border-[1px] p-3 text-wrap rounded-md;
     }
-    pre code{
+
+    pre code {
       @apply border-0 p-0 m-0 text-slate-300 bg-transparent;
     }
-    code{
-      @apply bg-[#233848]/40 text-slate-300 font-medium p-[1px] border-[#4D4D4E] border-[1.5px]  rounded-md;
+
+    code {
+      @apply bg-[#233848]/40 text-slate-300 font-medium p-[1px] border-[#4D4D4E] border-[1.5px] rounded-md;
     }
   }
-  
-  
+
+
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
